@@ -2,7 +2,7 @@ import calculateTotalTime from "@/lib/calculateTotalTime";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 const useCo2Table = (apnea: number, breathingSets: number[]) => {
-  const [mode, setMode] = useState("idle"); // idle | breathe | apnea
+  const [mode, setMode] = useState("idle"); // idle | breathe | apnea | finished
   const [currentSet, setCurrentSet] = useState(0);
   const [seconds, setSeconds] = useState(breathingSets[currentSet]);
   const TOTAL_SETS = breathingSets.length;
@@ -25,7 +25,7 @@ const useCo2Table = (apnea: number, breathingSets: number[]) => {
         setMode("breathe");
         setSeconds(breathingSets[nextSet]);
       } else {
-        setMode("idle");
+        setMode("finished");
       }
     }
   }, [currentSet, mode, TOTAL_SETS, apnea, breathingSets]);
@@ -50,7 +50,7 @@ const useCo2Table = (apnea: number, breathingSets: number[]) => {
     setMode("breathe");
   };
 
-  return { mode, seconds, totalTime, start };
+  return { mode, seconds, totalTime, start, currentSet };
 };
 
 export { useCo2Table };
