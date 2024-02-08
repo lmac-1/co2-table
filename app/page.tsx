@@ -1,7 +1,7 @@
 "use client";
 import { useCo2Table } from "@/hooks/use-co2-table";
 
-const APNEA = 75; // seconds
+const APNEA = 60; // seconds
 const BREATHING_SETS = [160, 135, 120, 105, 90, 75, 60];
 
 export default function CO2Table() {
@@ -16,9 +16,9 @@ export default function CO2Table() {
     <main className="flex min-h-screen bg-blue-200 flex-col items-center justify-center p-24">
       <p className="text-3xl">{timerMode}</p>
       {timerMode === "idle" && (
-        <p>
-          Total time of exercise: <br />
-          {totalTime.minutes} minutes {totalTime.seconds} seconds
+        <p className="absolute top-0">
+          Total time of exercise: {totalTime.minutes} minutes{" "}
+          {totalTime.seconds} seconds
         </p>
       )}
       {timerMode === "idle" && (
